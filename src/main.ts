@@ -5,46 +5,8 @@ import { ValidationError } from 'class-validator';
 import { resolveValidationError } from '@app/gateway/exception';
 import { HttpExceptionFilter } from '@app/exception/http-exception';
 import { LoggerFactoryService } from '@app/core/logger/logger-factory.service';
-import {
-  DocumentBuilder,
-  SwaggerCustomOptions,
-  SwaggerModule,
-} from '@nestjs/swagger';
-import {
-  addBearerAuth,
-  SWAGGER_ACCESS_TOKEN_KEY,
-  SWAGGER_ADMIN_ACCESS_TOKEN_KEY,
-} from '@app/gateway/swagger';
 import { AppConfig } from './modules/config/config.type';
-
-function setupSwagger(path: string, app: any) {
-  let swaggerBuilder = new DocumentBuilder()
-    .setTitle('Money Restful API')
-    .setVersion('1.0');
-
-  swaggerBuilder = addBearerAuth(
-    swaggerBuilder,
-    {
-      key: SWAGGER_ACCESS_TOKEN_KEY,
-      name: 'User Token',
-    },
-    {
-      key: SWAGGER_ADMIN_ACCESS_TOKEN_KEY,
-      name: 'Admin Token',
-    },
-  );
-  const config = swaggerBuilder.build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  const customOptions: SwaggerCustomOptions = {
-    swaggerOptions: {
-      persistAuthorization: true,
-      cacheControl: false,
-      etag: false,
-    },
-  };
-  SwaggerModule.setup(path, app, document, customOptions);
-}
+import { setupSwagger } from '@app/core/config/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
