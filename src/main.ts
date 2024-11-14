@@ -6,7 +6,7 @@ import { resolveValidationError } from '@app/gateway/exception';
 import { HttpExceptionFilter } from '@app/exception/http-exception';
 import { LoggerFactoryService } from '@app/core/logger/logger-factory.service';
 import { AppConfig } from './modules/config/config.type';
-import { setupSwagger } from '@app/core/config/swagger';
+import { setupSwagger } from '@app/core/config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
