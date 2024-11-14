@@ -1,0 +1,15 @@
+server:
+  httpPort: 3000
+  swaggerPath: '/swagger'
+
+database:
+  host: 'localhost'
+  port: 5432
+  database: 'money'
+  type: 'postgres'
+  username: 'postgres'
+  password: ''
+
+log:
+  consoleLevel: debug
+  consoleJSONFormat: 'false'
